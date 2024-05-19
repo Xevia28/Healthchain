@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Healthchain Management</title>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <nav class="navbar bg-primary">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1 text-light">Healthchain Management</span>
+            </div>
+        </nav>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        Create Patient Information
+                    </div>
+                    <div class="card-body">
+                        <form id="createPatientForm">
+                            <div class="mb-3">
+                                <label for="patientId" class="form-label">ID</label>
+                                <input type="text" class="form-control" id="patientId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="patientName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="patientName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="patientAge" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="patientAge">
+                            </div>
+                            <div class="mb-3">
+                                <label for="patientNotes" class="form-label">Note</label>
+                                <input type="text" class="form-control" id="patientNotes">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card " id="HealthchainCard">
+                    <div class="card-header">Patient Information</div>
+                    <div class="card-body">
+                        <form id="getPatientForm">
+                            <div class="mb-3">
+                                <label for="searchPatientId" class="form-label">Patient ID</label>
+                                <input type="text" class="form-control" id="searchPatientId">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <form id="editPatientForm" class="d-none">
+                            <label id="editPatientId" class="form-label">ID : </label>
+                            <div class="mb-3">
+                                <label for="editPatientName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editPatientName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPatientAge" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="editPatientAge">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPatientNotes" class="form-label">Note</label>
+                                <input type="text" class="form-control" id="editPatientNotes">
+                            </div>
+                            <button type="button" id="updatePatientButton" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                    <div class="card-footer"><label class="text-danger" id="patient-message"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        Create Hospital Information
+                    </div>
+                    <div class="card-body">
+                        <form id="createHospitalForm">
+                            <div class="mb-3">
+                                <label for="hospitalId" class="form-label">ID</label>
+                                <input type="text" class="form-control" id="hospitalId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hospitalName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="hospitalName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hospitalAddress" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="hospitalAddress">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hospitalPhone" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="hospitalPhone">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card " id="HealthchainCard">
+                    <div class="card-header">Hospital Information</div>
+                    <div class="card-body">
+                        <form id="getHospitalForm">
+                            <div class="mb-3">
+                                <label for="searchHospitalId" class="form-label">Hospital ID</label>
+                                <input type="text" class="form-control" id="searchHospitalId">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <form id="editHospitalForm" class="d-none">
+                            <label id="editHospitalId" class="form-label">ID : </label>
+                            <div class="mb-3">
+                                <label for="editHospitalName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editHospitalName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editHospitalAddress" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="editHospitalAddress">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editHospitalPhone" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="editHospitalPhone">
+                            </div>
+                            <button type="button" id="updateHospitalButton" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                    <div class="card-footer"><label class="text-danger" id="hospital-message"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        Create Insurance Information
+                    </div>
+                    <div class="card-body">
+                        <form id="createInsuranceForm">
+                            <div class="mb-3">
+                                <label for="claimId" class="form-label">Claim Id</label>
+                                <input type="text" class="form-control" id="claimId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="insuranceId" class="form-label">Insurance ID</label>
+                                <input type="text" class="form-control" id="insuranceId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="pId" class="form-label">Patient Id</label>
+                                <input type="number" class="form-control" id="pId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hId" class="form-label">Hospital Id</label>
+                                <input type="number" class="form-control" id="hId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="treatment" class="form-label">Treatment</label>
+                                <input type="text" class="form-control" id="treatment">
+                            </div>
+                            <div class="mb-3">
+                                <label for="IAmount" class="form-label">Amount</label>
+                                <input type="number" class="form-control" id="IAmount">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card " id="HealthchainCard">
+                    <div class="card-header">Patient Information</div>
+                    <div class="card-body">
+                        <form id="getInsuranceForm">
+                            <div class="mb-3">
+                                <label for="searchInsuranceId" class="form-label">Claim ID</label>
+                                <input type="text" class="form-control" id="searchInsuranceId">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <form id="editInsuranceForm" class="d-none">
+                            <label id="editClaimId" class="form-label">ID : </label>
+                            <div class="mb-3">
+                                <label for="editInsuranceId" class="form-label">Insurance ID</label>
+                                <input type="text" class="form-control" id="editInsuranceId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPId" class="form-label">Patient Id</label>
+                                <input type="number" class="form-control" id="editPId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editHId" class="form-label">Hospital Id</label>
+                                <input type="number" class="form-control" id="editHId">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editTreatment" class="form-label">Treatment</label>
+                                <input type="text" class="form-control" id="editTreatment">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editIAmount" class="form-label">Amount</label>
+                                <input type="number" class="form-control" id="editIAmount">
+                            </div>
+                            <button type="button" id="updateInsuranceButton" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                    <div class="card-footer"><label class="text-danger" id="insurance-message"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="successModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>The transaction is successful.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            id="noButton">No</button>
+                        <button type="button" class="btn btn-primary" id="yesButton">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+</body>
+
+</html>

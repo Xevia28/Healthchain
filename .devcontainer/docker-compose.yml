@@ -1,0 +1,117 @@
+networks:
+  healthchain-network:
+    name: healthchain-network
+
+volumes:
+  data-healthchain-orderer:
+  data-healthchain-hospital:
+  data-healthchain-insurance:
+  data-healthchain-patients:
+
+
+services:
+  development:
+    container_name: healthchain
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    stop_grace_period: 5s
+    volumes:
+      - ../..:/workspaces:cached
+    networks:
+      - healthchain-network
+
+  healthchain-orderer:
+    container_name: orderer.healthchain.org
+    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    command: orderer
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - FABRIC_LOGGING_SPEC=ERROR
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+    volumes:
+      - ${PWD}/config/orderer:/var/hyperledger/config
+      - ${PWD}/config/crypto-config/ordererOrganizations/healthchain.org/orderers/orderer.healthchain.org/msp:/var/hyperledger/msp
+      - ${PWD}/config/crypto-config/ordererOrganizations/healthchain.org/orderers/orderer.healthchain.org/tls:/var/hyperledger/tls
+      - data-healthchain-orderer:/var/ledger
+    ports:
+      - 7050:7050
+      - 8443:8443
+    networks:
+      - healthchain-network
+
+  healthchain-hospital:
+    container_name: hospital.healthchain.org
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - FABRIC_LOGGING_SPEC=WARNING
+      - CORE_PEER_LOCALMSPID=Healthchain
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthchain-network
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=hospital.healthchain.org:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    command: peer node start
+    volumes:
+      - ${PWD}/config/hospital:/var/hyperledger/config
+      - ${PWD}/config/crypto-config/peerOrganizations/healthchain.org/peers/hospital/msp:/var/hyperledger/msp
+      - ${PWD}/config/crypto-config/peerOrganizations/healthchain.org/peers/hospital/tls:/var/hyperledger/tls
+      - /var/run/:/var/run/
+      - data-healthchain-hospital:/var/hyperledger/production
+    depends_on:
+      - healthchain-orderer
+    ports:
+      - 7051:7051
+      - 7052:7052
+    networks:
+      - healthchain-network
+
+  healthchain-insurance:
+    container_name: insurance.healthchain.org
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - FABRIC_LOGGING_SPEC=WARNING
+      - CORE_PEER_LOCALMSPID=Healthchain
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthchain-network
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=insurance.healthchain.org:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    command: peer node start
+    volumes:
+      - ${PWD}/config/insurance:/var/hyperledger/config
+      - ${PWD}/config/crypto-config/peerOrganizations/healthchain.org/peers/insurance/msp:/var/hyperledger/msp
+      - ${PWD}/config/crypto-config/peerOrganizations/healthchain.org/peers/insurance/tls:/var/hyperledger/tls
+      - /var/run/:/var/run/
+      - data-healthchain-insurance:/var/hyperledger/production
+    depends_on:
+      - healthchain-orderer
+    ports:
+      - 8051:7051
+      - 8052:7052
+    networks:
+      - healthchain-network
+
+  healthchain-patients:
+    container_name: patients.healthchain.org
+    image: hyperledger/fabric-peer:$IMAGE_TAG
+    environment:
+      - FABRIC_CFG_PATH=/var/hyperledger/config
+      - FABRIC_LOGGING_SPEC=WARNING
+      - CORE_PEER_LOCALMSPID=Healthchain
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=healthchain-network
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=patients.healthchain.org:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    command: peer node start
+    volumes:
+      - ${PWD}/config/patients:/var/hyperledger/config
+      - ${PWD}/config/crypto-config/peerOrganizations/healthchain.org/peers/patients/msp:/var/hyperledger/msp
+      - ${PWD}/config/crypto-config/peerOrganizations/healthchain.org/peers/patients/tls:/var/hyperledger/tls
+      - /var/run/:/var/run/
+      - data-healthchain-patients:/var/hyperledger/production
+    depends_on:
+      - healthchain-orderer
+    ports:
+      - 9051:7051
+      - 9052:7052
+    networks:
+      - healthchain-network

@@ -1,0 +1,45 @@
+{
+    "name": "HealthchainConsortium",
+    "version": "1.0.0",
+    "channels": {
+        "healthchainchannel": {
+            "orderers": [
+                "orderer.healthchain.org"
+            ],
+            "peers": {
+                "hospital.healthchain.org": {},
+                "insurance.healthchain.org": {},
+                "patients.healthchain.org": {}
+            }
+        }
+    },
+    "organizations": {
+        "Healthchain": {
+            "mspid": "Healthchain",
+            "peers": [
+                "hospital.healthchain.org",
+                "insurance.healthchain.org",
+                "patients.healthchain.org"
+            ]
+        }
+    },
+    "orderers": {
+        "orderer.healthchain.org": {
+            "url": "grpc://orderer.healthchain.org:7050",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer.healthchain.org"
+            }
+        }
+    },
+    "peers": {
+        "hospital.healthchain.org": {
+            "url": "grpc://hospital.healthchain.org:7051"
+        },
+        "insurance.healthchain.org": {
+            "url": "grpc://insurance.healthchain.org:7051"
+        },
+        "patients.healthchain.org": {
+            "url": "grpc://patients.healthchain.org:7051"
+        }
+    }
+}

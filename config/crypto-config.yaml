@@ -1,0 +1,24 @@
+# Defines two organizations
+# - Orderer organization
+# - HealthchainOrg
+
+##### Orderer for healthchain
+OrdererOrgs:
+  - Name: Orderer
+    Domain: healthchain.org
+    Specs:
+      - Hostname: orderer
+
+#### Peer for healthchain
+PeerOrgs:
+  - Name: HealthchainOrg
+    Domain: healthchain.org
+    Specs:
+      - Hostname: hospital
+        CommonName: hospital
+      - Hostname: insurance
+        CommonName: insurance
+      - Hostname: patients
+        CommonName: patients
+    Users:
+      Count: 2

@@ -1,0 +1,9 @@
+{
+  "name": "HealthChainConsortium",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "development",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  }
+}
